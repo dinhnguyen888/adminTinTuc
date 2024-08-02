@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.accountManagement = new System.Windows.Forms.Button();
-            this.newsManagement = new System.Windows.Forms.Button();
-            this.commentManagement = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.commentManagement = new System.Windows.Forms.Button();
+            this.newsManagement = new System.Windows.Forms.Button();
+            this.accountManagement = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,37 +48,6 @@
             this.panel1.Size = new System.Drawing.Size(931, 450);
             this.panel1.TabIndex = 0;
             // 
-            // accountManagement
-            // 
-            this.accountManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.accountManagement.Location = new System.Drawing.Point(35, 182);
-            this.accountManagement.Name = "accountManagement";
-            this.accountManagement.Size = new System.Drawing.Size(273, 64);
-            this.accountManagement.TabIndex = 0;
-            this.accountManagement.Text = "ACCOUNT MANAGEMENT";
-            this.accountManagement.UseVisualStyleBackColor = true;
-            this.accountManagement.Click += new System.EventHandler(this.accountManagement_Click);
-            // 
-            // newsManagement
-            // 
-            this.newsManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newsManagement.Location = new System.Drawing.Point(345, 182);
-            this.newsManagement.Name = "newsManagement";
-            this.newsManagement.Size = new System.Drawing.Size(257, 64);
-            this.newsManagement.TabIndex = 1;
-            this.newsManagement.Text = "NEWS MANAGEMENT";
-            this.newsManagement.UseVisualStyleBackColor = true;
-            // 
-            // commentManagement
-            // 
-            this.commentManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.commentManagement.Location = new System.Drawing.Point(636, 182);
-            this.commentManagement.Name = "commentManagement";
-            this.commentManagement.Size = new System.Drawing.Size(257, 64);
-            this.commentManagement.TabIndex = 2;
-            this.commentManagement.Text = "COMMENT MANAGEMENT";
-            this.commentManagement.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -91,6 +60,38 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "ADMIN PANEL";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // commentManagement
+            // 
+            this.commentManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.commentManagement.Location = new System.Drawing.Point(636, 182);
+            this.commentManagement.Name = "commentManagement";
+            this.commentManagement.Size = new System.Drawing.Size(257, 64);
+            this.commentManagement.TabIndex = 2;
+            this.commentManagement.Text = "COMMENT MANAGEMENT";
+            this.commentManagement.UseVisualStyleBackColor = true;
+            // 
+            // newsManagement
+            // 
+            this.newsManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.newsManagement.Location = new System.Drawing.Point(345, 182);
+            this.newsManagement.Name = "newsManagement";
+            this.newsManagement.Size = new System.Drawing.Size(257, 64);
+            this.newsManagement.TabIndex = 1;
+            this.newsManagement.Text = "NEWS MANAGEMENT";
+            this.newsManagement.UseVisualStyleBackColor = true;
+            this.newsManagement.Click += new System.EventHandler(this.newsManagement_Click);
+            // 
+            // accountManagement
+            // 
+            this.accountManagement.Font = new System.Drawing.Font("Microsoft Tai Le", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.accountManagement.Location = new System.Drawing.Point(35, 182);
+            this.accountManagement.Name = "accountManagement";
+            this.accountManagement.Size = new System.Drawing.Size(273, 64);
+            this.accountManagement.TabIndex = 0;
+            this.accountManagement.Text = "ACCOUNT MANAGEMENT";
+            this.accountManagement.UseVisualStyleBackColor = true;
+            this.accountManagement.Click += new System.EventHandler(this.accountManagement_Click);
             // 
             // Form2
             // 

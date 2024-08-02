@@ -43,5 +43,21 @@ namespace adminTinTuc
             // Close the entire application when Form2 is closed
             Application.Exit();
         }
+
+        private void newsManagement_Click(object sender, EventArgs e)
+        {
+
+            // Create an instance of Form3
+            Form4 form4 = new Form4();
+
+            // Show Form3
+            form4.Show();
+
+            // Hide Form2
+            this.Hide();
+
+            // Optional: Handle Form3's FormClosed event to show Form2 again if needed
+            form4.FormClosed += (s, args) => this.Show();
+        }
     }
 }
