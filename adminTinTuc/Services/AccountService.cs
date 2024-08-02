@@ -27,7 +27,8 @@ public class AccountService
         }
         else
         {
-            return "Error registering account.";
+            var errorContent = await response.Content.ReadAsStringAsync();
+            return $"Error registering account: {response.StatusCode} - {errorContent}";
         }
     }
 }
@@ -37,5 +38,5 @@ public class AccountRegistrationDto
     public string Email { get; set; }
     public string Password { get; set; }
     public string Name { get; set; }
-    public string[] Roles { get; set; }
+    public string Roles { get; set; }
 }

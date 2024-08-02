@@ -111,17 +111,18 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Role";
             // 
-            // loginBtn
+            // addBtn
             // 
             this.addBtn.BackColor = System.Drawing.SystemColors.Info;
             this.addBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.addBtn.Location = new System.Drawing.Point(302, 372);
-            this.addBtn.Name = "loginBtn";
+            this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(204, 57);
             this.addBtn.TabIndex = 10;
             this.addBtn.Text = "ADD";
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // AddAccountForm
             // 

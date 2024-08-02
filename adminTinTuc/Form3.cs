@@ -31,5 +31,11 @@ namespace adminTinTuc
         {
 
         }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            var addAccountForm = new AddAccountForm();
+            addAccountForm.ShowDialog();
+        }
     }
 }

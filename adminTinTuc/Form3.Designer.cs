@@ -97,6 +97,7 @@
             this.addButton.TabIndex = 0;
             this.addButton.Text = "ADD ACCOUNT";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.addButton_Click);
             // 
             // dataGridView1
             // 
