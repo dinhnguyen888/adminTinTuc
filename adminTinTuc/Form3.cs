@@ -174,5 +174,50 @@ namespace adminTinTuc
             public DateTime UpdatedAt { get; set; }
             public string Roles { get; set; }
         }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra nếu có hàng nào được chọn
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                // Lấy Id của tài khoản được chọn
+                var selectedRow = dataGridView1.SelectedRows[0];
+                var accountId = selectedRow.Cells["Id"].Value.ToString();
+
+                // Xác nhận trước khi xóa
+                var confirmResult = MessageBox.Show("Are you sure you want to delete this account?", "Confirm Delete", MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        try
+                        {
+                            string apiUrl = $"https://localhost:7161/api/Account/{accountId}";
+                            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                            HttpResponseMessage response = await client.DeleteAsync(apiUrl);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("Account deleted successfully!");
+                                await LoadAccountData(); // Làm mới dữ liệu trong dataGridView1
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to delete account. Status Code: " + response.StatusCode);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an account to delete.");
+            }
+        }
     }
 }
