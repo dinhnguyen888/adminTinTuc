@@ -31,12 +31,13 @@
             this.emailBox = new System.Windows.Forms.TextBox();
             this.passwordBox = new System.Windows.Forms.TextBox();
             this.nameBox = new System.Windows.Forms.TextBox();
-            this.rolesBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.addBtn = new System.Windows.Forms.Button();
+            this.userBtn = new System.Windows.Forms.RadioButton();
+            this.adminBtn = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // emailBox
@@ -62,14 +63,6 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(359, 30);
             this.nameBox.TabIndex = 4;
-            // 
-            // rolesBox
-            // 
-            this.rolesBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.rolesBox.Location = new System.Drawing.Point(281, 303);
-            this.rolesBox.Name = "rolesBox";
-            this.rolesBox.Size = new System.Drawing.Size(359, 30);
-            this.rolesBox.TabIndex = 5;
             // 
             // label1
             // 
@@ -124,17 +117,40 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
+            // userBtn
+            // 
+            this.userBtn.AutoSize = true;
+            this.userBtn.Location = new System.Drawing.Point(281, 307);
+            this.userBtn.Name = "userBtn";
+            this.userBtn.Size = new System.Drawing.Size(57, 20);
+            this.userBtn.TabIndex = 11;
+            this.userBtn.TabStop = true;
+            this.userBtn.Text = "User";
+            this.userBtn.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.adminBtn.AutoSize = true;
+            this.adminBtn.Location = new System.Drawing.Point(430, 307);
+            this.adminBtn.Name = "radioButton1";
+            this.adminBtn.Size = new System.Drawing.Size(57, 20);
+            this.adminBtn.TabIndex = 12;
+            this.adminBtn.TabStop = true;
+            this.adminBtn.Text = "Admin";
+            this.adminBtn.UseVisualStyleBackColor = true;
+            // 
             // AddAccountForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.adminBtn);
+            this.Controls.Add(this.userBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.rolesBox);
             this.Controls.Add(this.nameBox);
             this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.emailBox);
@@ -151,11 +167,12 @@
         private System.Windows.Forms.TextBox emailBox;
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.TextBox rolesBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.RadioButton userBtn;
+        private System.Windows.Forms.RadioButton adminBtn;
     }
 }

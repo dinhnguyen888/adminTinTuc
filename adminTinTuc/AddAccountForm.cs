@@ -25,13 +25,14 @@ namespace adminTinTuc
             var email = emailBox.Text;
             var password = passwordBox.Text;
             var name = nameBox.Text;
-            var roles = rolesBox.Text;
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Email and Password are required.");
                 return;
             }
+
+            var roles = userBtn.Checked ? "User" : adminBtn.Checked ? "Admin" : null;
 
             var accountDto = new AccountRegistrationDto
             {
