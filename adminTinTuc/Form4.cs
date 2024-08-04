@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using static adminTinTuc.Form3;
 
 namespace adminTinTuc
 {
@@ -69,6 +70,51 @@ namespace adminTinTuc
             public string Description { get; set; }
             public string Content { get; set; }
             public string Type { get; set; }
+        }
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridView1.SelectedRows[0];
+                var id = selectedRow.Cells["Id"].Value.ToString();
+
+                var confirmation = MessageBox.Show("Are you sure you want to delete this news item?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+                if (confirmation == DialogResult.Yes)
+                {
+                    try
+                    {
+                        //var response = await client.DeleteAsync($"https://localhost:7161/api/News/{id}");
+                        //response.EnsureSuccessStatusCode();
+                        string apiUrl = $"https://localhost:7161/api/News/{id}";
+                        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                        HttpResponseMessage response = await client.DeleteAsync(apiUrl);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("News deleted successfully!");
+                            LoadNewsData(); // Làm mới dữ liệu trong dataGridView1
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete news. Status Code: " + response.StatusCode);
+                        }
+
+                        // Refresh the DataGridView
+                        //LoadNewsData();
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        MessageBox.Show($"Request error: {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a news item to delete.");
+            }
         }
     }
 }
