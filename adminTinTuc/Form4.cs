@@ -35,15 +35,6 @@ namespace adminTinTuc
                 var newsList = JsonConvert.DeserializeObject<List<NewsDTO>>(responseBody);
 
                 dataGridView1.DataSource = newsList;
-
-                //dataGridView1.Columns["Title"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                //dataGridView1.Columns["Description"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                //dataGridView1.Columns["Content"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-
-                //dataGridView1.Columns["Content"].Width = 700;
-
-                // Auto-size rows to fit the content
-                //dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             }
             catch (HttpRequestException e)
             {
@@ -56,6 +47,7 @@ namespace adminTinTuc
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var selectedRow = dataGridView1.SelectedRows[0];
+                txtTitle.Text = selectedRow.Cells["Title"].Value.ToString();
                 txtDescription.Text = selectedRow.Cells["Description"].Value.ToString();
                 txtContent.Text = selectedRow.Cells["Content"].Value.ToString();
             }
@@ -85,8 +77,6 @@ namespace adminTinTuc
                 {
                     try
                     {
-                        //var response = await client.DeleteAsync($"https://localhost:7161/api/News/{id}");
-                        //response.EnsureSuccessStatusCode();
                         string apiUrl = $"https://localhost:7161/api/News/{id}";
                         client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
 
@@ -101,9 +91,6 @@ namespace adminTinTuc
                         {
                             MessageBox.Show("Failed to delete news. Status Code: " + response.StatusCode);
                         }
-
-                        // Refresh the DataGridView
-                        //LoadNewsData();
                     }
                     catch (HttpRequestException ex)
                     {
@@ -114,6 +101,68 @@ namespace adminTinTuc
             else
             {
                 MessageBox.Show("Please select a news item to delete.");
+            }
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    var selectedRow = dataGridView1.SelectedRows[0];
+                    var id = selectedRow.Cells["Id"].Value.ToString();
+
+                    var confirmation = MessageBox.Show("Are you sure you want to update this news item?", "Confirm Update", MessageBoxButtons.YesNo);
+
+                    if (confirmation == DialogResult.Yes)
+                    {
+                        // Lấy thông tin hiện tại của tin tức để giữ nguyên các trường không thay đổi
+                        var currentNews = (NewsDTO)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                        var updatedNews = new NewsDTO
+                        {
+                            Id = currentNews.Id, // Giữ nguyên Id
+                            Title = txtTitle.Text, // Cập nhật Title
+                            LinkDetail = currentNews.LinkDetail, // Giữ nguyên LinkDetail
+                            ImageUrl = currentNews.ImageUrl, // Giữ nguyên ImageUrl
+                            Description = txtDescription.Text, // Cập nhật Description
+                            Content = txtContent.Text, // Cập nhật Content
+                            Type = currentNews.Type // Giữ nguyên Type
+                        };
+
+                        var json = System.Text.Json.JsonSerializer.Serialize(updatedNews);
+                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                        try
+                        {
+                            string apiUrl = $"https://localhost:7161/api/News/{id}";
+                            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                            HttpResponseMessage response = await client.PutAsync(apiUrl, content);
+
+                            if (response.IsSuccessStatusCode)
+                            {
+                                MessageBox.Show("News updated successfully!");
+                                LoadNewsData(); // Làm mới dữ liệu trong dataGridView1
+                            }
+                            else
+                            {
+                                // Hiển thị nội dung phản hồi để gỡ lỗi
+                                var responseContent = await response.Content.ReadAsStringAsync();
+                                MessageBox.Show($"Failed to update news. Status Code: {response.StatusCode}\nResponse: {responseContent}");
+                            }
+                        }
+                        catch (HttpRequestException ex)
+                        {
+                            MessageBox.Show($"Request error: {ex.Message}");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a news item to update.");
+                }
             }
         }
     }

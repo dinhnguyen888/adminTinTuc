@@ -32,6 +32,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.txtContent = new System.Windows.Forms.TextBox();
@@ -56,6 +57,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtTitle);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.txtDescription);
             this.splitContainer1.Panel2.Controls.Add(this.txtContent);
@@ -83,6 +85,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "UPDATE NEWS";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -93,6 +96,16 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "CREATE NEWS";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // txtTitle
+            // 
+            this.txtTitle.Location = new System.Drawing.Point(0, 506);
+            this.txtTitle.Multiline = true;
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtTitle.Size = new System.Drawing.Size(1716, 42);
+            this.txtTitle.TabIndex = 3;
+            this.txtTitle.Text = "Title";
             // 
             // dataGridView1
             // 
@@ -108,11 +121,11 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(0, 506);
+            this.txtDescription.Location = new System.Drawing.Point(0, 547);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(1716, 150);
+            this.txtDescription.Size = new System.Drawing.Size(1716, 109);
             this.txtDescription.TabIndex = 1;
             this.txtDescription.Text = "Description";
             // 
@@ -153,5 +166,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.TextBox txtContent;
+        private System.Windows.Forms.TextBox txtTitle;
     }
 }
