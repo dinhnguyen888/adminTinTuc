@@ -68,6 +68,7 @@ namespace adminTinTuc
         private void addButton_Click(object sender, EventArgs e)
         {
             var addAccountForm = new AddAccountForm();
+            addAccountForm.FormClosed += AddAccountForm_FormClosed;
             addAccountForm.ShowDialog();
         }
 
@@ -162,6 +163,11 @@ namespace adminTinTuc
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private async void AddAccountForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            await LoadAccountData();
         }
 
         public class Account
