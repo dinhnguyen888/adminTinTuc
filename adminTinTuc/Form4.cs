@@ -165,5 +165,39 @@ namespace adminTinTuc
                 }
             }
         }
+
+        private async void searchBtn_Click(object sender, EventArgs e)
+        {
+            string searchType = searchBox.Text.Trim();
+            if (string.IsNullOrEmpty(searchType))
+            {
+                MessageBox.Show("Please enter a type to search.");
+                return;
+            }
+
+            try
+            {
+                string apiUrl = $"https://localhost:7161/api/News/type/{searchType}";
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    var newsList = JsonConvert.DeserializeObject<List<NewsDTO>>(responseBody);
+
+                    dataGridView1.DataSource = newsList;
+                }
+                else
+                {
+                    MessageBox.Show($"Failed to fetch news by type. Status Code: {response.StatusCode}");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Request error: {ex.Message}");
+            }
+        }
     }
 }
