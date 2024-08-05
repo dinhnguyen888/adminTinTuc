@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,9 +48,10 @@ namespace adminTinTuc
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var selectedRow = dataGridView1.SelectedRows[0];
-                txtTitle.Text = selectedRow.Cells["Title"].Value.ToString();
-                txtDescription.Text = selectedRow.Cells["Description"].Value.ToString();
-                txtContent.Text = selectedRow.Cells["Content"].Value.ToString();
+
+                txtTitle.Text = selectedRow.Cells["Title"].Value?.ToString() ?? string.Empty;
+                txtDescription.Text = selectedRow.Cells["Description"].Value?.ToString() ?? string.Empty;
+                txtContent.Text = selectedRow.Cells["Content"].Value?.ToString() ?? string.Empty;
             }
         }
 
@@ -68,39 +70,53 @@ namespace adminTinTuc
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var selectedRow = dataGridView1.SelectedRows[0];
-                var id = selectedRow.Cells["Id"].Value.ToString();
-
-                var confirmation = MessageBox.Show("Are you sure you want to delete this news item?", "Confirm Delete", MessageBoxButtons.YesNo);
+                var confirmation = MessageBox.Show("Are you sure you want to delete the selected news items?", "Confirm Delete", MessageBoxButtons.YesNo);
 
                 if (confirmation == DialogResult.Yes)
                 {
-                    try
+                    bool allDeleted = true;
+                    List<string> failedDeletes = new List<string>();
+
+                    foreach (DataGridViewRow selectedRow in dataGridView1.SelectedRows)
                     {
-                        string apiUrl = $"https://localhost:7161/api/News/{id}";
-                        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+                        var id = selectedRow.Cells["Id"].Value.ToString();
 
-                        HttpResponseMessage response = await client.DeleteAsync(apiUrl);
-
-                        if (response.IsSuccessStatusCode)
+                        try
                         {
-                            MessageBox.Show("News deleted successfully!");
-                            LoadNewsData(); // Làm mới dữ liệu trong dataGridView1
+                            string apiUrl = $"https://localhost:7161/api/News/{id}";
+                            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                            HttpResponseMessage response = await client.DeleteAsync(apiUrl);
+
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                allDeleted = false;
+                                failedDeletes.Add(id);
+                            }
                         }
-                        else
+                        catch (HttpRequestException ex)
                         {
-                            MessageBox.Show("Failed to delete news. Status Code: " + response.StatusCode);
+                            MessageBox.Show($"Request error for news ID {id}: {ex.Message}");
+                            allDeleted = false;
+                            failedDeletes.Add(id);
                         }
                     }
-                    catch (HttpRequestException ex)
+
+                    if (allDeleted)
                     {
-                        MessageBox.Show($"Request error: {ex.Message}");
+                        MessageBox.Show("All selected news deleted successfully!");
                     }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete some news. Failed IDs: " + string.Join(", ", failedDeletes));
+                    }
+
+                    LoadNewsData(); // Làm mới dữ liệu trong dataGridView1
                 }
             }
             else
             {
-                MessageBox.Show("Please select a news item to delete.");
+                MessageBox.Show("Please select news items to delete.");
             }
         }
 
@@ -205,6 +221,65 @@ namespace adminTinTuc
             var form5 = new CreateNewsForm();
             form5.FormClosed += (s, args) => LoadNewsData(); // Refresh the data when the form is closed
             form5.Show();
+        }
+
+        private async void button4_Click(object sender, EventArgs e)
+        {
+            string totalPageStr = "1"; // Default value
+            if (InputBox.Show("Start Crawling", "Enter the number of pages to crawl:", ref totalPageStr) == DialogResult.OK)
+            {
+                if (int.TryParse(totalPageStr, out int totalPage))
+                {
+                    var content = new StringContent(System.Text.Json.JsonSerializer.Serialize(totalPage), System.Text.Encoding.UTF8, "application/json");
+
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                    try
+                    {
+                        HttpResponseMessage response = await client.PostAsync("https://localhost:7161/api/Crawl/start", content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Crawling started successfully!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to start crawling. Status Code: " + response.StatusCode);
+                        }
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        MessageBox.Show($"Request error: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Invalid number of pages entered.");
+                }
+            }
+        }
+
+        private async void button5_Click(object sender, EventArgs e)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+            try
+            {
+                HttpResponseMessage response = await client.PostAsync("https://localhost:7161/api/Crawl/stop", null);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Crawling stopped successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to stop crawling. Status Code: " + response.StatusCode);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"Request error: {ex.Message}");
+            }
         }
     }
 }
