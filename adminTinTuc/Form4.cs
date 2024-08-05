@@ -199,5 +199,12 @@ namespace adminTinTuc
                 MessageBox.Show($"Request error: {ex.Message}");
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var form5 = new CreateNewsForm();
+            form5.FormClosed += (s, args) => LoadNewsData(); // Refresh the data when the form is closed
+            form5.Show();
+        }
     }
 }

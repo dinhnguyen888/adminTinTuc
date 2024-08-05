@@ -128,12 +128,12 @@
             this.userBtn.Text = "User";
             this.userBtn.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // adminBtn
             // 
             this.adminBtn.AutoSize = true;
             this.adminBtn.Location = new System.Drawing.Point(430, 307);
-            this.adminBtn.Name = "radioButton1";
-            this.adminBtn.Size = new System.Drawing.Size(57, 20);
+            this.adminBtn.Name = "adminBtn";
+            this.adminBtn.Size = new System.Drawing.Size(66, 20);
             this.adminBtn.TabIndex = 12;
             this.adminBtn.TabStop = true;
             this.adminBtn.Text = "Admin";

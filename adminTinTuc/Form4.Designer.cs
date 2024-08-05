@@ -71,7 +71,7 @@
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(126, 254);
+            this.searchBtn.Location = new System.Drawing.Point(126, 506);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(74, 29);
             this.searchBtn.TabIndex = 5;
@@ -81,7 +81,7 @@
             // 
             // searchBox
             // 
-            this.searchBox.Location = new System.Drawing.Point(3, 254);
+            this.searchBox.Location = new System.Drawing.Point(3, 506);
             this.searchBox.Multiline = true;
             this.searchBox.Name = "searchBox";
             this.searchBox.Size = new System.Drawing.Size(128, 29);
@@ -118,6 +118,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "CREATE NEWS";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtTitle
             // 
