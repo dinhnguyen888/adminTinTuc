@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -160,6 +161,62 @@ namespace adminTinTuc
             else
             {
                 MessageBox.Show("Please select a comment to reply.");
+            }
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridViewComment.SelectedRows.Count > 0)
+            {
+                var confirmation = MessageBox.Show("Are you sure you want to delete the selected news items?", "Confirm Delete", MessageBoxButtons.YesNo);
+
+                if (confirmation == DialogResult.Yes)
+                {
+                    bool allDeleted = true;
+                    List<string> failedDeletes = new List<string>();
+
+                    foreach (DataGridViewRow selectedRow in dataGridViewComment.SelectedRows)
+                    {
+                        var id = selectedRow.Cells["CommentId"].Value.ToString();
+
+                        try
+                        {
+                            string apiUrl = $"https://localhost:7161/api/Comments/remove-comment";
+                            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
+
+                            var jsonContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
+                            HttpResponseMessage response = await client.PostAsync(apiUrl, jsonContent);
+
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                allDeleted = false;
+                                failedDeletes.Add(id);
+                            }
+                        }
+                        catch (HttpRequestException ex)
+                        {
+                            MessageBox.Show($"Request error for news ID {id}: {ex.Message}");
+                            allDeleted = false;
+                            failedDeletes.Add(id);
+                        }
+                    }
+
+                    if (allDeleted)
+                    {
+                        MessageBox.Show("All selected news deleted successfully!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to delete some news. Failed IDs: " + string.Join(", ", failedDeletes));
+                    }
+
+                    LoadCommentsData();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select news items to delete.");
             }
         }
     }

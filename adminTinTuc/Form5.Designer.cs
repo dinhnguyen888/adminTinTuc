@@ -72,6 +72,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "DELETE COMMENT";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -94,12 +95,12 @@
             this.txtTitle.TabIndex = 3;
             this.txtTitle.Text = "Title";
             // 
-            // dataGridView1
+            // dataGridViewComment
             // 
             this.dataGridViewComment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewComment.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridViewComment.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewComment.Name = "dataGridView1";
+            this.dataGridViewComment.Name = "dataGridViewComment";
             this.dataGridViewComment.RowHeadersWidth = 51;
             this.dataGridViewComment.RowTemplate.Height = 24;
             this.dataGridViewComment.Size = new System.Drawing.Size(1716, 500);
