@@ -70,6 +70,7 @@
             this.commentManagement.TabIndex = 2;
             this.commentManagement.Text = "COMMENT MANAGEMENT";
             this.commentManagement.UseVisualStyleBackColor = true;
+            this.commentManagement.Click += new System.EventHandler(this.commentManagement_Click);
             // 
             // newsManagement
             // 

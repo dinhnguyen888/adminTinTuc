@@ -84,6 +84,9 @@ namespace adminTinTuc
 
                         var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
                         var role = jsonToken.Claims.First(claim => claim.Type == "role").Value;
+                        var userId = jsonToken.Claims.First(claim => claim.Type == "unique_name").Value;
+
+                        GlobalVariables.CurrentUserId = userId;
 
                         if (role == "Admin")
                         {
@@ -108,9 +111,11 @@ namespace adminTinTuc
                 }
             }
         }
+
     }
     public static class GlobalVariables
     {
         public static string JwtToken { get; set; }
+        public static string CurrentUserId { get; set; }
     }
 }

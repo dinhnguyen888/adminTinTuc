@@ -59,5 +59,20 @@ namespace adminTinTuc
             // Optional: Handle Form3's FormClosed event to show Form2 again if needed
             form4.FormClosed += (s, args) => this.Show();
         }
+
+        private void commentManagement_Click(object sender, EventArgs e)
+        {
+            // Create an instance of Form3
+            Form5 form5 = new Form5();
+
+            // Show Form3
+            form5.Show();
+
+            // Hide Form2
+            this.Hide();
+
+            // Optional: Handle Form3's FormClosed event to show Form2 again if needed
+            form5.FormClosed += (s, args) => this.Show();
+        }
     }
 }
