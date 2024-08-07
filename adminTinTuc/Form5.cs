@@ -109,6 +109,16 @@ namespace adminTinTuc
             public string Content { get; set; }
         }
 
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewComment.SelectedRows.Count > 0)
+            {
+                var selectedRow = dataGridViewComment.SelectedRows[0];
+
+                txtCommentContent.Text = selectedRow.Cells["Content"].Value?.ToString() ?? string.Empty;
+            }
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
             if (dataGridViewComment.SelectedRows.Count > 0)

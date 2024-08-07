@@ -31,10 +31,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtCommentContent = new System.Windows.Forms.TextBox();
             this.dataGridViewComment = new System.Windows.Forms.DataGridView();
-            this.txtDescription = new System.Windows.Forms.TextBox();
-            this.txtContent = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -55,11 +53,9 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtTitle);
+            this.splitContainer1.Panel2.Controls.Add(this.txtCommentContent);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridViewComment);
-            this.splitContainer1.Panel2.Controls.Add(this.txtDescription);
-            this.splitContainer1.Panel2.Controls.Add(this.txtContent);
-            this.splitContainer1.Size = new System.Drawing.Size(1920, 1055);
+            this.splitContainer1.Size = new System.Drawing.Size(1920, 701);
             this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -87,13 +83,13 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(0, 506);
-            this.txtTitle.Multiline = true;
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTitle.Size = new System.Drawing.Size(1716, 42);
-            this.txtTitle.TabIndex = 3;
-            this.txtTitle.Text = "Title";
+            this.txtCommentContent.Location = new System.Drawing.Point(0, 506);
+            this.txtCommentContent.Multiline = true;
+            this.txtCommentContent.Name = "txtCommentContent";
+            this.txtCommentContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtCommentContent.Size = new System.Drawing.Size(1716, 192);
+            this.txtCommentContent.TabIndex = 3; 
+            this.txtCommentContent.Text = "Comment Content";
             // 
             // dataGridViewComment
             // 
@@ -105,32 +101,13 @@
             this.dataGridViewComment.RowTemplate.Height = 24;
             this.dataGridViewComment.Size = new System.Drawing.Size(1716, 500);
             this.dataGridViewComment.TabIndex = 0;
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(0, 547);
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescription.Size = new System.Drawing.Size(1716, 109);
-            this.txtDescription.TabIndex = 1;
-            this.txtDescription.Text = "Description";
-            // 
-            // txtContent
-            // 
-            this.txtContent.Location = new System.Drawing.Point(-3, 651);
-            this.txtContent.Multiline = true;
-            this.txtContent.Name = "txtContent";
-            this.txtContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtContent.Size = new System.Drawing.Size(1716, 404);
-            this.txtContent.TabIndex = 2;
-            this.txtContent.Text = "Content";
+            this.dataGridViewComment.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1920, 1055);
+            this.ClientSize = new System.Drawing.Size(1920, 701);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form5";
             this.Text = "Form5";
@@ -150,8 +127,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridViewComment;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.TextBox txtContent;
-        private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.TextBox txtCommentContent;
     }
 }
