@@ -119,7 +119,7 @@ namespace adminTinTuc
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        /*private async void button1_Click(object sender, EventArgs e)
         {
             if (dataGridViewComment.SelectedRows.Count > 0)
             {
@@ -172,7 +172,7 @@ namespace adminTinTuc
             {
                 MessageBox.Show("Please select a comment to reply.");
             }
-        }
+        }*/
 
         private async void button2_Click(object sender, EventArgs e)
         {
