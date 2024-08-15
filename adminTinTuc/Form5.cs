@@ -119,7 +119,7 @@ namespace adminTinTuc
             }
         }
 
-        /*private async void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             if (dataGridViewComment.SelectedRows.Count > 0)
             {
@@ -172,7 +172,7 @@ namespace adminTinTuc
             {
                 MessageBox.Show("Please select a comment to reply.");
             }
-        }*/
+        }
 
         private async void button2_Click(object sender, EventArgs e)
         {
@@ -192,7 +192,7 @@ namespace adminTinTuc
 
                         try
                         {
-                            string apiUrl = $"https://localhost:7161/api/Comments/remove-comment";
+                            string apiUrl = $"https://localhost:7161/api/Comments/delete-comment";
                             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
 
                             var jsonContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
