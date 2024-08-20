@@ -192,7 +192,7 @@ namespace adminTinTuc
 
                         try
                         {
-                            string apiUrl = $"https://localhost:7161/api/Comments/delete-comment";
+                            string apiUrl = $"https://localhost:7161/api/Comments/remove-comment";
                             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", GlobalVariables.JwtToken);
 
                             var jsonContent = new StringContent(JsonConvert.SerializeObject(id), Encoding.UTF8, "application/json");
